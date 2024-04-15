@@ -15,6 +15,18 @@
     height: 800px;
 }
 
+.video-container {
+    display: flex;
+    justify-content: center; /* Horizontal zentrieren */
+    align-items: center; /* Vertikal zentrieren */
+    height: 100%; /* Setzt die Höhe des Containers auf 100% der Elternhöhe */
+}
+
+.video-container iframe {
+    max-width: 100%; /* Maximale Breite des Iframes auf 100% des Containers */
+    max-height: 100%; /* Maximale Höhe des Iframes auf 100% des Containers */
+}
+
         .containerTest{
             font-size: 24px;
             position: absolute;
@@ -68,8 +80,7 @@
             margin-top: 20px;
         }
         .menu-link:hover{
-    text-decoration: underline;
-    
+    text-decoration: underline; 
 }
 
 
@@ -91,12 +102,14 @@
 
     <section class="container portfolio">
         <h2>Video</h2>
-        <video width="640" height="760" controls>
-            <source src="video.MOV" type="video/mp4">
-            <!-- Falls der Browser das Video-Format nicht unterstützt, hier ein alternatives Format angeben -->
-            <!-- <source src="video.MOV" type="video/webm"> -->
-            Dein Browser unterstützt das Video-Tag nicht.
-        </video>
+        <div class="video-container">
+            <iframe src="https://onedrive.live.com/embed?resid=A78104FD6CF1C7C3%2110676&authkey=!ADY7TwSCC-sjN20" 
+                    width="320" height="500" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowfullscreen>
+            </iframe>
+        </div>
     </section>
 </body>
 
