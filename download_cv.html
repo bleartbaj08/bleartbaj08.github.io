@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Auto-Download</title>
+</head>
+<body>
+    <a id="pdfDownload" href="Lebenslauf_Bleart_Bajrami.pdf" download="Lebenslauf_Bleart_Bajrami.pdf">PDF herunterladen</a>
+
+    <script>
+        // Automatisches Auslösen des Downloads beim Laden der Seite
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('pdfDownload').click();
+        });
+    </script>
+</body>
+</html>
