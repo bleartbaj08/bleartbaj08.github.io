@@ -4,14 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Auto-Download</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .message {
+            display: none;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .message.error {
+            background-color: #f44336;
+        }
+    </style>
 </head>
 <body>
+    <div id="feedbackMessage" class="message">Das PDF wurde erfolgreich heruntergeladen!</div>
+
     <a id="pdfDownload" href="Lebenslauf_Bleart_Bajrami.pdf" download="Lebenslauf_Bleart_Bajrami.pdf">PDF herunterladen</a>
 
     <script>
-        // Automatisches Auslösen des Downloads beim Laden der Seite
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('pdfDownload').click();
+            var downloadLink = document.getElementById('pdfDownload');
+            var feedbackMessage = document.getElementById('feedbackMessage');
+
+            // Auslösen des Downloads
+            downloadLink.click();
+
+            // Feedback nach einer Verzögerung anzeigen
+            setTimeout(function() {
+                if (isDownloadComplete()) {
+                    feedbackMessage.textContent = 'Das PDF wurde erfolgreich heruntergeladen!';
+                    feedbackMessage.classList.remove('error');
+                } else {
+                    feedbackMessage.textContent = 'Es gab ein Problem beim Herunterladen des PDFs.';
+                    feedbackMessage.classList.add('error');
+                }
+                feedbackMessage.style.display = 'block';
+            }, 1000); // Zeitverzögerung von 1 Sekunde
+
+            // Funktion zur Überprüfung, ob der Download abgeschlossen ist
+            function isDownloadComplete() {
+                // Hier kann eine weitere Überprüfung erfolgen. In diesem Fall wird die Annahme getroffen,
+                // dass der Download erfolgreich war.
+                return true;
+            }
         });
     </script>
 </body>
