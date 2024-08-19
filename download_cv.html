@@ -28,6 +28,10 @@
         .message.error {
             background-color: #f44336;
         }
+
+        #pdfDownload {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -43,7 +47,7 @@
             // Auslösen des Downloads
             downloadLink.click();
 
-            // Feedback nach einer Verzögerung anzeigen
+            // Feedback nach einer Verzögerung anzeigen und Link verbergen
             setTimeout(function() {
                 if (isDownloadComplete()) {
                     feedbackMessage.textContent = 'Das PDF wurde erfolgreich heruntergeladen!';
@@ -53,6 +57,7 @@
                     feedbackMessage.classList.add('error');
                 }
                 feedbackMessage.style.display = 'block';
+                downloadLink.style.display = 'none'; // Versteckt den Download-Link
             }, 1000); // Zeitverzögerung von 1 Sekunde
 
             // Funktion zur Überprüfung, ob der Download abgeschlossen ist
