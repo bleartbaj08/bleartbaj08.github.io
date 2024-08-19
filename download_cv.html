@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Auto-Download</title>
+    <title>PDF Download</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,42 +23,62 @@
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             text-align: center;
+            margin-top: 20px;
         }
 
         .message.error {
             background-color: #f44336;
         }
 
-        #pdfDownload {
-            display: none;
+        #downloadButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #downloadButton:active {
+            background-color: #005f73;
         }
     </style>
 </head>
 <body>
-    <div id="feedbackMessage" class="message">Das PDF wurde erfolgreich heruntergeladen!</div>
-
-    <a id="pdfDownload" href="Lebenslauf_Bleart_Bajrami.pdf" download="Lebenslauf_Bleart_Bajrami.pdf">PDF herunterladen</a>
+    <div>
+        <button id="downloadButton">PDF herunterladen</button>
+        <div id="feedbackMessage" class="message"></div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var downloadLink = document.getElementById('pdfDownload');
+            var downloadButton = document.getElementById('downloadButton');
             var feedbackMessage = document.getElementById('feedbackMessage');
+            var downloadLink = "Lebenslauf_Bleart_Bajrami.pdf";
 
-            // Auslösen des Downloads
-            downloadLink.click();
+            downloadButton.addEventListener('click', function() {
+                // Auslösen des Downloads
+                var a = document.createElement('a');
+                a.href = downloadLink;
+                a.download = "Lebenslauf_Bleart_Bajrami.pdf";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
 
-            // Feedback nach einer Verzögerung anzeigen und Link verbergen
-            setTimeout(function() {
-                if (isDownloadComplete()) {
-                    feedbackMessage.textContent = 'Das PDF wurde erfolgreich heruntergeladen!';
-                    feedbackMessage.classList.remove('error');
-                } else {
-                    feedbackMessage.textContent = 'Es gab ein Problem beim Herunterladen des PDFs.';
-                    feedbackMessage.classList.add('error');
-                }
-                feedbackMessage.style.display = 'block';
-                downloadLink.style.display = 'none'; // Versteckt den Download-Link
-            }, 1000); // Zeitverzögerung von 1 Sekunde
+                // Feedback anzeigen und Schaltfläche ausblenden
+                setTimeout(function() {
+                    if (isDownloadComplete()) {
+                        feedbackMessage.textContent = 'Das PDF wurde erfolgreich heruntergeladen!';
+                        feedbackMessage.classList.remove('error');
+                    } else {
+                        feedbackMessage.textContent = 'Es gab ein Problem beim Herunterladen des PDFs.';
+                        feedbackMessage.classList.add('error');
+                    }
+                    feedbackMessage.style.display = 'block';
+                    downloadButton.style.display = 'none'; // Versteckt den Button
+                }, 1000); // Zeitverzögerung von 1 Sekunde
+            });
 
             // Funktion zur Überprüfung, ob der Download abgeschlossen ist
             function isDownloadComplete() {
